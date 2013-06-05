@@ -25,4 +25,5 @@ What happens when you click on this link now:
 3. It animations the page to $('#contact'). If possible it will finish `addedOffset` pixels above the element.
 
 Other tricks:
+
 It doesn't have to be a link. Clicking on any element will work but you'll need to put a `data-scroll-target` attribute on the element to specify the selector you want to scroll to.
