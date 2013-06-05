@@ -1,11 +1,10 @@
 Usage:
 
 Markup:
-
 ```
 <a href="#contact" class="scroll-to-target">Contact</a>
+```
 Initialize:
-
 ```
 $('.scroll-to-target').clickScrollTo() 
 ```
