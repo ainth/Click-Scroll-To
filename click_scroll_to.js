@@ -44,7 +44,7 @@
         animationType: 'swing'
     };
 
-    $.fn.clickScrollTo = ( options ) {
+    $.fn.clickScrollTo = function( options ) {
         if (options == null) { options = {}; }
         options  = $.extend({}, defaults, options);
         selector = this.selector; 
