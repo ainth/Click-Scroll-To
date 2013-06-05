@@ -20,23 +20,13 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
-/*
-
-    Usage:
-    <a href="#contact" class="scroll-to-target">Contact</a>
-    $('.scroll-to-target').clickScrollTo() 
-
-    What happens when you click on this link now:
-    1) Default link behaviour is prevented.
-    2) It tries to find `$('#contact')`. If it can't, nothing happens.
-    3) It scrolls the page to $('#contact').
-
-*/
+// Full documentation can be found at https://github.com/ainth/Click-Scroll-To
+// or in the README file.
+//
 (function ( $ ) {
 
     var defaults = {
-        // How many pixels above the target link to  on.
+        // How many pixels above the target link to scroll on.
         addedOffset: 50,
         // Scroll animation time.
         animationTime: 800,
@@ -50,11 +40,17 @@
         selector = this.selector; 
 
         var scroll_to_target = function (ev) {
-            var $e, $target, offset, _ref;
+            var $this, $target, scrollTarget, offset, _ref;
             ev.preventDefault();
-            $e = $(ev.target).closest(selector);
-            $target = $($e.attr('href'));
+            // If you click something within the link (eg an image) we still want $e
+            //  to be the link (or whatever) itself.
+            $this = $(ev.target).closest(selector);
+            // The selector you want to scroll to, usually href of a link
+            scrollTarget = $this.data('scroll-target') || $this.attr('href');
+            // $target is that which we are scrolling to.
+            $target = $(scrollTarget);
             if ($target.length) {
+                // Distance between the top of document and the top of the $target
                 offset = typeof $target.offset === "function" ? (_ref = $target.offset()) != null ? _ref.top : void 0 : void 0;
                 if (offset) {
                     $('html,body').animate({
