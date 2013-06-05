@@ -55,10 +55,10 @@
             $e = $(ev.target).closest(selector);
             $target = $($e.attr('href'));
             if ($target.length) {
-                position = typeof $target.position === "function" ? (_ref = $target.position()) != null ? _ref.top : void 0 : void 0;
-                if (position) {
+                offset = typeof $target.offset === "function" ? (_ref = $target.offset()) != null ? _ref.top : void 0 : void 0;
+                if (offset) {
                     $('html,body').animate({
-                        scrollTop: position - options.addedOffset
+                        scrollTop: offset - options.addedOffset
                     }, options.animationTime, options.animationType);
                 }
             }
