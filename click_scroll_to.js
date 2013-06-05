@@ -24,43 +24,48 @@
 /*
 
     Usage:
+    <a href="#contact" class="scroll-to-target">Contact</a>
+    $('.scroll-to-target').clickScrollTo() 
 
-    This will make clicking on a link with a class of `scroll-to-target` scroll to the
-    element specified by the `href` of that link on the current page. eg you click on:
-
-        <a class="scroll-to-target" href="#contact">Contact</a>
-
-    What happens is:
+    What happens when you click on this link now:
     1) Default link behaviour is prevented.
     2) It tries to find `$('#contact')`. If it can't, nothing happens.
     3) It scrolls the page to $('#contact').
 
 */
-$(function() {
-    // CONFIG //
-    // How many pixels above the target link to land on.
-    var ADDED_OFFSET   = 50;
-    // Class needed on all links we want this behaviour on.
-    var LINK_SELECTOR  = '.scroll-to-target';
-    // Scroll animation time.
-    var ANIMATION_TIME = 800;
-    // What kind of animation
-    var ANIMATION_TYPE = 'swing';
-  
-    var scroll_to_target;
-    scroll_to_target = function(ev) {
-        var $e, $target, offset, _ref;
-        ev.preventDefault();
-        $e = $(ev.target).closest(LINK_SELECTOR);
-        $target = $($e.attr('href'));
-        if ($target.length) {
-            position = typeof $target.position === "function" ? (_ref = $target.position()) != null ? _ref.top : void 0 : void 0;
-            if (position) {
-                $('html,body').animate({
-                    scrollTop: offset - ADDED_OFFSET
-                }, ANIMATION_TIME, ANIMATION_TYPE);
-            }
-        }
+(function ( $ ) {
+
+    var defaults = {
+        // How many pixels above the target link to  on.
+        addedOffset: 50,
+        // Scroll animation time.
+        animationTime: 800,
+        // What kind of animation.
+        animationType: 'swing'
     };
-    $('body').on('click', 'a'+LINK_SELECTOR, scroll_to_target);
-});
+
+    $.fn.clickScrollTo = ( options ) {
+        if (options == null) { options = {}; }
+        options  = $.extend({}, defaults, options);
+        selector = this.selector; 
+
+        var scroll_to_target = function (ev) {
+            var $e, $target, offset, _ref;
+            ev.preventDefault();
+            $e = $(ev.target).closest(selector);
+            $target = $($e.attr('href'));
+            if ($target.length) {
+                position = typeof $target.position === "function" ? (_ref = $target.position()) != null ? _ref.top : void 0 : void 0;
+                if (position) {
+                    $('html,body').animate({
+                        scrollTop: position - options.addedOffset
+                    }, options.animationTime, options.animationType);
+                }
+            }
+        };
+
+        this.on('click', scroll_to_target);
+        return this;
+    };
+
+}(jQuery));
