@@ -1,4 +1,9 @@
 //
+// Click Scroll To
+// @Version: 0.1
+// @Website: https://github.com/ainth/Click-Scroll-To
+// @Author: Allen Hebden
+//
 // Copyright (c) 2013 Allen Hebden
 //
 // Permission is hereby granted, free of charge, to any person obtaining
