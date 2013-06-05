@@ -19,6 +19,7 @@ animationType: 'swing'
 ```
 
 What happens when you click on this link now:
+
 1. Default link behaviour is prevented.
 2. It tries to find `$('#contact')`. If it can't, nothing happens.
 3. It animations the page to $('#contact'). If possible it will finish `addedOffset` pixels above the element.
